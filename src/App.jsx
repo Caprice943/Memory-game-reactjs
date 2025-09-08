@@ -46,10 +46,7 @@ function App() {
       setSecondChoice(card)
     } else {
       setFirstChoice(card)
-     
-    }
-    
-    
+    } 
     console.log(firstChoice);
   }
 
@@ -67,7 +64,6 @@ function App() {
               }
             })
             
-
           })
           resetChoice()
 
