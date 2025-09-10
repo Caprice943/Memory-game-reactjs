@@ -1,75 +1,156 @@
+@import url('https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&display=swap');
+
+:root {
+  --bg: #b0c4de;
+  /* lightsteelblue */
+  --text: #0b1320;
+  --card-border: #95d147;
+  --accent: #58d36c;
+  --radius: 10px;
+  --gap: 1rem;
+  --card-ratio: 16 / 9; /* aspect ratio carte */
+}
+
 body {
-  margin: 0;
+  /* margin: 0; */
   font-size: 1.5em;
   text-align: center;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  color: var(--text);
+  height: 100vh;
+ font-family: "DynaPuff", system-ui;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:"wdth" 100;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: lightsteelblue;
-  
+  /* background: var(--bg); */
+  background-image: linear-gradient(to top, #053719, #1c6126, #408e2b, #6fbc28, #a8eb12);
+
 }
 
 button {
-  background: none;
+  background: transparent;
+  font-family: inherit;
   border: 2px solid #fff;
-  padding: 6px 12px;
-  border-radius: 4px;
+  padding: 8px 14px;
+  border-radius: 6px;
   color: #fff;
-  font-weight: bold;
+  font-weight: 500;
   cursor: pointer;
-  font-size: 1em;
+  font-size: 1rem;
+  transition: transform .08s ease;
+  user-select: none;
 }
 
 button:hover {
-  background: #c23866;
-  color: #fff;
+  background: var(--accent);
 }
 
-.card{
+button:active {
+  transform: translateY(1px) scale(0.99);
+}
+
+button:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 2px;
+}
+
+.card {
   position: relative;
+  perspective: 1000px;
 }
-.card-grid{
-  width: 150px;
-  height: 100px;
+
+.card-grid {
+  max-width: min(1200px, 92vw);
   display: grid;
-  grid-template-columns: repeat(9, 1fr);
-  grid-gap: 10px;
-  margin-top: 40px;
-  margin-left: 250px;
-  
-  
+  justify-items: center;
+  align-items: center;
+  grid-template-columns: repeat(6, 1fr);
+  margin: 0 auto;
+  column-gap: 2px;
+  gap: var(--gap);
+  cursor: grab;
 }
 
-.card-grid img{
-  border-radius: 9px;
-  padding: 3px;
+.card>div {
+  position: relative;
+  width: 100%;
+  aspect-ratio: var(--card-ratio);
+  transform-style: preserve-3d;
+  transition: transform 0.35s ease;
+  border-radius: var(--radius);
+}
+
+.card-grid img {
+  border-radius: var(--radius);
   display: block;
-  border: 2px solid whitesmoke;
+  border: 3px solid var(--card-border);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
-.cover{
-  height: 100px;
-}
-
-.card .fruit{
-  transform: rotateY(90deg);
+.card .fruit {
   position: absolute;
-  transition: 0.2s ease-in;
+  transform: rotateY(180deg);
+  inset: 0;
+
 }
 
-.flipped .fruit{
+ .cover {
+  background-size: cover;
+  height: 100px;
+  inset: 0;
+  pointer-events: auto;
   transform: rotateY(0deg);
-  transition: 0.2s ease-in;
+
 }
 
 
-.flipped .cover{
-  transform: rotateY(90deg);
+.flipped {
+  transform: rotateY(180deg);
 }
 
+.controls span {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin: 12px;
+  justify-content: center;
+  font-style: italic;
+}
 
+.modal {
+  background: rgba(255, 255, 255, 0.1);
+  background: linear-gradient(135deg,
+      rgba(144, 221, 161, 0.5) 0%,
+      rgba(167, 177, 78, 0.1) 50%,
+      rgba(228, 102, 18, 0.05) 100%);
+  color: #0b1320;
+  padding: 24px 28px;
+  border-radius: 12px;
+  min-width: min(90vw, 360px);
+  box-shadow: 0 4px 30px rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
 
+.modal h2 {
+  margin: 0 0 8px;
+}
 
+.modal p {
+  margin: 0 0 16px;
+  font-style: italic;
+}
 
+@media (prefers-reduced-motion: reduce) {
+  .card>div {
+    transition: none;
+  }
+
+  .fruit,
+  .cover {
+    transition: none;
+  }
+}
